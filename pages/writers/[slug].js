@@ -2,20 +2,68 @@ import React from "react"
 import { client } from "../../lib/apolloClient"
 import { gql } from "@apollo/client"
 import { isEmpty } from "lodash"
+import Image from "next/image"
 
 const GET_WRITER = gql`
   query ($id: ID!) {
     writer(id: $id, idType: SLUG) {
       title
       id
-      slug
+      customDataAttributes: writerDataAttributes {
+        about
+        background
+        specialistSubjects {
+          subject
+        }
+        guideBooks {
+          url
+          title
+        }
+        awards {
+          title
+          url
+        }
+        onTheBucketList
+        instagram
+        location
+        twitter
+        website
+        wikipedia
+        facebook
+        linkedin
+      }
+      featuredImage {
+        node {
+          altText
+          sourceUrl
+          id
+          caption
+          description
+        }
+      }
     }
   }
 `
 
 const Writer = ({ writerData = {} }) => {
   const { writer } = writerData?.data || {}
-  return <h1 className="uppercase">{writer.title}</h1>
+  const { title, featuredImage, customDataAttributes } = writer || {}
+  const { altText, sourceUrl } = featuredImage?.node
+  return (
+    <div>
+      <h1 className="uppercase">{writer.title}</h1>
+      <div className="flex mb-5">
+        <Image
+          src={sourceUrl}
+          alt={altText}
+          width={414}
+          height={276}
+          objectFit="cover"
+          objectPosition="center"
+        />
+      </div>
+    </div>
+  )
 }
 
 export default Writer
