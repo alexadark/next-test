@@ -21,9 +21,6 @@ const Writers = ({ writersData = {} }) => {
   return (
     <>
       {writers?.map((item) => {
-        console.log("writer item", item)
-
-        // return <Listing key={item.id} item={item} noBl writer />
         return (
           <h2 className="uppercase !text-red-400" key={item.id}>
             <Link href={item.uri}>
