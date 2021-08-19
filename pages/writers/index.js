@@ -25,7 +25,7 @@ const Writers = ({ writersData = {} }) => {
 
         // return <Listing key={item.id} item={item} noBl writer />
         return (
-          <h2 key={item.id}>
+          <h2 className="uppercase !text-red-400" key={item.id}>
             <Link href={item.uri}>
               <a>{item.title}</a>
             </Link>

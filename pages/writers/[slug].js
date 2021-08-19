@@ -15,7 +15,7 @@ const GET_WRITER = gql`
 
 const Writer = ({ writerData = {} }) => {
   const { writer } = writerData?.data || {}
-  return <h1>{writer.title}</h1>
+  return <h1 className="uppercase">{writer.title}</h1>
 }
 
 export default Writer
